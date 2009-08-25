@@ -13,6 +13,8 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: cfitsio-devel
 BuildRequires: tiff-devel
 BuildRequires: imagemagick-devel
+BuildRequires: mesaglut-devel
+BuildRequires: mesagl-devel
 
 %description
 Olena is a platform dedicated to image processing. At the moment it is mainly
