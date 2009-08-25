@@ -87,7 +87,7 @@ trimesh C++ main Olena library.
 
 %package devel
 Summary: Olena devel files
-Group: Development/c++
+Group: Development/C++
 Requires: %{libtrimesh} = %{version}
 Requires: %{libgluit} = %{version}
 Requires: olena-tools
