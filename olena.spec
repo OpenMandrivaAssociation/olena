@@ -1,20 +1,27 @@
 %bcond_with apps
+%bcond_with doc
+
+%define rev 419
 
 Name: olena
 Version: 1.0
-Release: %mkrel 1
+Release: %mkrel -c 0 %{rev}
+Epoch: 1
 License: GPLv2
 Summary: Olena is a platform dedicated to image processing
 Group: Development/C++
 URL: http://www.lrde.epita.fr/cgi-bin/twiki/view/Olena/WebHome
+# Get from https://svn.lrde.epita.fr/svn/oln/tags/olena-1.0 to have scribo
 Source0:  %name-%version.tar.bz2
-Patch0: olena-1.0-undefined-fix.patch
+Patch0: olena-1.0-subdirs.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: cfitsio-devel
 BuildRequires: tiff-devel
 BuildRequires: imagemagick-devel
 BuildRequires: mesaglut-devel
 BuildRequires: mesagl-devel
+BuildRequires: vtk-devel
+BuildRequires: gdcm-devel
 
 %description
 Olena is a platform dedicated to image processing. At the moment it is mainly
@@ -27,6 +34,8 @@ programming expertise from the library development.
 
 #------------------------------------------------------------------------------
 
+%if %with doc
+
 %package doc
 Summary: Olena documentation
 Group: Books/Howtos
@@ -36,8 +45,9 @@ Olena documentation.
 
 %files doc
 %defattr(-,root,root,-)
-%_datadir/olena/images
 %_docdir/olena
+
+%endif
 
 #------------------------------------------------------------------------------
 
@@ -51,6 +61,7 @@ Olena tools.
 %files tools
 %defattr(-,root,root,-)
 %_bindir/*
+%_datadir/olena/images
 
 #------------------------------------------------------------------------------
 
@@ -88,8 +99,8 @@ trimesh C++ main Olena library.
 %package devel
 Summary: Olena devel files
 Group: Development/C++
-Requires: %{libtrimesh} = %{version}
-Requires: %{libgluit} = %{version}
+Requires: %{libtrimesh} = %{epoch}:%{version}
+Requires: %{libgluit} = %{epoch}:%{version}
 Requires: olena-tools
 
 %description devel
@@ -106,14 +117,16 @@ Olena devel files
 
 %prep
 %setup -q
+%if ! %with doc
 %patch0 -p0 -b .orig
+%endif
 
 %build
 CXXFLAGS="$CXXFLAGS -I%{_includedir}/ImageMagick"
-
 export CPPFLAGS CXXFLAGS
 
 %configure2_5x \
+	--enable-scribo \
 	--enable-trimesh \
 %if %with apps
 	--enable-apps \
