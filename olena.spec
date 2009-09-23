@@ -3,7 +3,7 @@
 
 Name: olena
 Version: 1.0
-Release: %mkrel 3
+Release: %mkrel 4
 Epoch: 2
 License: GPLv2
 Summary: Olena is a platform dedicated to image processing
@@ -23,13 +23,11 @@ BuildRequires: gdcm-devel
 BuildRequires: tesseract-devel >= 2.04-3
 
 %description
-Olena is a platform dedicated to image processing. At the moment it is mainly
-composed of a C++ library: Milena. This library features many tools to easily
-perform image processing tasks. Its main characteristic is its genericity: it
-allows to write an algorithm once and run it over many kinds of images (grey
-scale, color, 1D, 2D, 3D, ...). We do our image processing research using this
-library, but most importantly we have gathered (and still do) generic
-programming expertise from the library development.
+Olena is a platform dedicated to image processing. At the
+moment it is mainly composed of a C++ library: Milena. This library features
+many tools to easily perform image processing tasks. Its main characteristic is
+its genericity: it allows to write an algorithm once and run it over many kinds
+of images (grey scale, color, 1D, 2D, 3D, ...).
 
 #------------------------------------------------------------------------------
 
@@ -40,7 +38,12 @@ Summary: Olena documentation
 Group: Books/Howtos
 
 %description doc
-Olena documentation.
+This is the documentation for Olena.
+Olena is a platform dedicated to image processing. At the
+moment it is mainly composed of a C++ library: Milena. This library features
+many tools to easily perform image processing tasks. Its main characteristic is
+its genericity: it allows to write an algorithm once and run it over many kinds
+of images (grey scale, color, 1D, 2D, 3D, ...).
 
 %files doc
 %defattr(-,root,root,-)
@@ -55,7 +58,11 @@ Summary: Olena tools
 Group: Development/C++
 
 %description tools
-Olena tools.
+Olena is a platform dedicated to image processing. At the
+moment it is mainly composed of a C++ library: Milena. This library features
+many tools to easily perform image processing tasks. Its main characteristic is
+its genericity: it allows to write an algorithm once and run it over many kinds
+of images (grey scale, color, 1D, 2D, 3D, ...).
 
 %files tools
 %defattr(-,root,root,-)
@@ -104,6 +111,11 @@ Requires: olena-tools
 
 %description devel
 Olena devel files
+Olena is a platform dedicated to image processing. At the
+moment it is mainly composed of a C++ library: Milena. This library features
+many tools to easily perform image processing tasks. Its main characteristic is
+its genericity: it allows to write an algorithm once and run it over many kinds
+of images (grey scale, color, 1D, 2D, 3D, ...).
 
 %files devel
 %defattr(-,root,root,-)
