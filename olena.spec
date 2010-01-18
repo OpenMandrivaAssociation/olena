@@ -22,6 +22,7 @@ BuildRequires: vtk-devel
 BuildRequires: gdcm-devel
 BuildRequires: tesseract-devel >= 2.04-3
 BuildRequires: imagemagick
+BuildRequires: tetex-latex
 
 %description
 Olena is a platform dedicated to image processing. At the
