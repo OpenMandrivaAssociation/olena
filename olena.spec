@@ -3,7 +3,7 @@
 
 Name: olena
 Version: 1.0
-Release: %mkrel 5
+Release: %mkrel 6
 Epoch: 2
 License: GPLv2
 Summary: Olena is a platform dedicated to image processing
