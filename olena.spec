@@ -12,6 +12,7 @@ URL: http://www.lrde.epita.fr/cgi-bin/twiki/view/Olena/WebHome
 # Get from https://svn.lrde.epita.fr/svn/oln/tags/olena-1.0 to have scribo
 Source0:  %name-%version.tar.bz2
 Patch0: olena-1.0-subdirs.patch
+Patch1: olena-1.0-linkage.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: cfitsio-devel
 BuildRequires: tiff-devel
@@ -22,7 +23,7 @@ BuildRequires: vtk-devel
 BuildRequires: gdcm-devel
 BuildRequires: tesseract-devel >= 2.04-3
 BuildRequires: imagemagick
-BuildRequires: tetex-latex latex2html hevea
+BuildRequires: tetex-latex latex2html
 BuildRequires: doxygen
 
 %description
@@ -131,14 +132,18 @@ of images (grey scale, color, 1D, 2D, 3D, ...).
 
 %prep
 %setup -q
+%patch1 -p0
 %if ! %with doc
 %patch0 -p0 -b .orig
+autoreconf -fi
 %endif
+pushd external/trimesh
+autoreconf -fi
+popd
 
 %build
-CXXFLAGS="$CXXFLAGS -I%{_includedir}/ImageMagick"
-export CPPFLAGS CXXFLAGS
-
+#CXXFLAGS="%optflagsGS -I%{_includedir}/ImageMagick"
+#export CPPFLAGS CXXFLAGS
 %configure2_5x \
 	--enable-scribo \
 	--enable-trimesh \
@@ -146,6 +151,10 @@ export CPPFLAGS CXXFLAGS
 	--enable-apps \
 %endif
 	--enable-tools
+
+pushd external/trimesh
+%configure2_5x
+popd
 
 %make
 
