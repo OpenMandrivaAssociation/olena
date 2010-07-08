@@ -3,7 +3,7 @@
 
 Name: olena
 Version: 1.0
-Release: %mkrel 6
+Release: %mkrel 7
 Epoch: 2
 License: GPLv2
 Summary: Olena is a platform dedicated to image processing
@@ -20,7 +20,6 @@ BuildRequires: imagemagick-devel
 BuildRequires: mesaglut-devel
 BuildRequires: mesagl-devel
 BuildRequires: vtk-devel
-BuildRequires: gdcm-devel
 BuildRequires: tesseract-devel >= 2.04-3
 BuildRequires: imagemagick
 BuildRequires: tetex-latex latex2html
