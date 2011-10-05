@@ -121,7 +121,7 @@ of images (grey scale, color, 1D, 2D, 3D, ...).
 %{_libdir}/*.so
 %{_libdir}/*.la
 %{_includedir}/*
-%exclude %_libdir/*.a
+%_libdir/*.a
 
 #------------------------------------------------------------------------------
 
