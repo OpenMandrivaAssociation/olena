@@ -1,9 +1,9 @@
 %bcond_with apps
-%bcond_with doc
+%bcond_without doc
 
 Name: olena
-Version: 1.0
-Release: %mkrel 8
+Version: 2.0
+Release: 1
 Epoch: 2
 License: GPLv2
 Summary: Olena is a platform dedicated to image processing
