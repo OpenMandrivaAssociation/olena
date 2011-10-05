@@ -49,7 +49,6 @@ its genericity: it allows to write an algorithm once and run it over many kinds
 of images (grey scale, color, 1D, 2D, 3D, ...).
 
 %files doc
-%defattr(-,root,root,-)
 %_docdir/olena
 
 %endif
@@ -68,7 +67,6 @@ its genericity: it allows to write an algorithm once and run it over many kinds
 of images (grey scale, color, 1D, 2D, 3D, ...).
 
 %files tools
-%defattr(-,root,root,-)
 %_bindir/*
 %_datadir/olena/images
 
@@ -100,7 +98,6 @@ Group: Development/C++
 trimesh C++ main Olena library.
 
 %files -n %{libtrimesh}
-%defattr(-,root,root,-)
 %{_libdir}/libtrimesh.so.%{tri_major}*
 
 #------------------------------------------------------------------------------
@@ -121,7 +118,6 @@ its genericity: it allows to write an algorithm once and run it over many kinds
 of images (grey scale, color, 1D, 2D, 3D, ...).
 
 %files devel
-%defattr(-,root,root,-)
 %{_libdir}/*.so
 %{_libdir}/*.la
 %{_includedir}/*
@@ -141,8 +137,6 @@ autoreconf -fi
 popd
 
 %build
-#CXXFLAGS="%optflagsGS -I%{_includedir}/ImageMagick"
-#export CPPFLAGS CXXFLAGS
 %configure2_5x \
 	--enable-scribo \
 	--enable-trimesh \
@@ -158,9 +152,5 @@ popd
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
-
-%clean
-rm -rf %buildroot
 
