@@ -68,7 +68,8 @@ of images (grey scale, color, 1D, 2D, 3D, ...).
 
 %files tools
 %_bindir/*
-%_datadir/olena/images
+%_datadir/olena
+%_libdir/scribo/*
 
 #------------------------------------------------------------------------------
 
