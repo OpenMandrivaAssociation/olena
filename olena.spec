@@ -1,9 +1,11 @@
 %bcond_with apps
 %bcond_without doc
+# FIXME: enable scribo when it will be compatible with actual tesseract version
+%bcond_with scribo
 
 Name: olena
 Version: 2.0
-Release: 1
+Release: 2
 Epoch: 2
 License: GPLv2
 Summary: Olena is a platform dedicated to image processing
@@ -20,7 +22,9 @@ BuildRequires: imagemagick-devel
 BuildRequires: mesaglut-devel
 BuildRequires: mesagl-devel
 BuildRequires: vtk-devel
+%if %with scribo
 BuildRequires: tesseract-devel >= 2.04-3
+%endif
 BuildRequires: imagemagick
 BuildRequires: tetex-latex latex2html
 BuildRequires: doxygen
@@ -69,7 +73,9 @@ of images (grey scale, color, 1D, 2D, 3D, ...).
 %files tools
 %_bindir/*
 %_datadir/olena
+%if %with scribo
 %_libdir/scribo/*
+%endif
 
 #------------------------------------------------------------------------------
 
@@ -139,7 +145,9 @@ popd
 
 %build
 %configure2_5x \
+%if %with scribo
 	--enable-scribo \
+%endif
 	--enable-trimesh \
 %if %with apps
 	--enable-apps \
