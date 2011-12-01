@@ -1,11 +1,10 @@
 %bcond_with apps
 %bcond_without doc
-# FIXME: enable scribo when it will be compatible with actual tesseract version
-%bcond_with scribo
+%bcond_without scribo
 
 Name: olena
 Version: 2.0
-Release: 2
+Release: 3
 Epoch: 2
 License: GPLv2
 Summary: Olena is a platform dedicated to image processing
@@ -15,6 +14,7 @@ URL: http://www.lrde.epita.fr/cgi-bin/twiki/view/Olena/WebHome
 Source0:  %name-%version.tar.bz2
 Patch0: olena-1.0-subdirs.patch
 Patch1: olena-1.0-linkage.patch
+Patch2: olena-2.0-tesseract-3.01.patch
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 BuildRequires: cfitsio-devel
 BuildRequires: tiff-devel
@@ -26,7 +26,8 @@ BuildRequires: vtk-devel
 BuildRequires: tesseract-devel >= 2.04-3
 %endif
 BuildRequires: imagemagick
-BuildRequires: tetex-latex latex2html
+BuildRequires: texlive-latex texlive-dvips
+BuildRequires: latex2html
 BuildRequires: doxygen
 
 %description
@@ -135,6 +136,7 @@ of images (grey scale, color, 1D, 2D, 3D, ...).
 %prep
 %setup -q
 %patch1 -p0
+%patch2
 %if ! %with doc
 %patch0 -p0 -b .orig
 autoreconf -fi
