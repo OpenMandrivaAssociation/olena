@@ -1,0 +1,12 @@
+diff -urN olena-2.0/milena/mln/core/dpoints_pixter.hh olena-2.0-patched/milena/mln/core/dpoints_pixter.hh
+--- olena-2.0/milena/mln/core/dpoints_pixter.hh	2011-09-17 01:26:14.000000000 +1100
++++ olena-2.0-patched/milena/mln/core/dpoints_pixter.hh	2012-10-11 16:01:25.692452248 +1100
+@@ -286,7 +286,7 @@
+     if (is_valid())
+       {
+ 	if (p_ref_)
+-	  this->value_ptr_ = & image_(*p_ref_) + *i_;
++	  this->value_ptr_ = & this->image_(*p_ref_) + *i_;
+ 	else
+ 	  this->value_ptr_ = * value_ref_ + *i_;
+       }
