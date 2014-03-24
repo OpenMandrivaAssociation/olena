@@ -2,34 +2,36 @@
 %bcond_without doc
 %bcond_without scribo
 
+Summary:	Olena is a platform dedicated to image processing
 Name:		olena
 Version:	2.0
-Release:	3
+Release:	4
 Epoch:		2
-License:	GPLv2
-Summary:	Olena is a platform dedicated to image processing
+License:	GPLv2+
 Group:		Development/C++
-URL:		http://www.lrde.epita.fr/cgi-bin/twiki/view/Olena/WebHome
+Url:		http://www.lrde.epita.fr/cgi-bin/twiki/view/Olena/WebHome
 # Get from https://svn.lrde.epita.fr/svn/oln/tags/olena-1.0 to have scribo
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		olena-1.0-subdirs.patch
 Patch1:		olena-1.0-linkage.patch
 Patch2:		olena-2.0-tesseract-3.01.patch
 Patch3:		olena-2.0-gcc4.7.patch
-BuildRequires:	cfitsio-devel
-BuildRequires:	tiff-devel
-BuildRequires:	pkgconfig(ImageMagick)
-BuildRequires:	pkgconfig(glut)
-BuildRequires:	pkgconfig(gl)
-BuildRequires:	pkgconfig(xmu)
-BuildRequires:	vtk-devel
-%if %with scribo
-BuildRequires:	tesseract-devel >= 2.04-3
-%endif
-BuildRequires:	imagemagick
-BuildRequires:	texlive-latex texlive-dvips
-BuildRequires:	latex2html
+Patch4:		olena-2.0-automake1.13.patch
 BuildRequires:	doxygen
+BuildRequires:	imagemagick
+BuildRequires:	latex2html
+BuildRequires:	texlive-latex
+BuildRequires:	texlive-dvips
+#BuildRequires:	vtk-devel
+BuildRequires:	pkgconfig(cfitsio)
+BuildRequires:	pkgconfig(gl)
+BuildRequires:	pkgconfig(glut)
+BuildRequires:	pkgconfig(ImageMagick)
+BuildRequires:	pkgconfig(libtiff-4)
+%if %{with scribo}
+BuildRequires:	pkgconfig(tesseract)
+%endif
+BuildRequires:	pkgconfig(xmu)
 
 %description
 Olena is a platform dedicated to image processing. At the
@@ -40,8 +42,7 @@ of images (grey scale, color, 1D, 2D, 3D, ...).
 
 #------------------------------------------------------------------------------
 
-%if %with doc
-
+%if %{with doc}
 %package doc
 Summary:	Olena documentation
 Group:		Books/Howtos
@@ -56,7 +57,6 @@ of images (grey scale, color, 1D, 2D, 3D, ...).
 
 %files doc
 %{_docdir}/olena
-
 %endif
 
 #------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ of images (grey scale, color, 1D, 2D, 3D, ...).
 %files tools
 %{_bindir}/*
 %{_datadir}/olena
-%if %with scribo
+%if %{with scribo}
 %{_libdir}/scribo/*
 %endif
 
@@ -114,8 +114,8 @@ trimesh C++ main Olena library.
 %package devel
 Summary:	Olena devel files
 Group:		Development/C++
-Requires:	%{libtrimesh} = %{epoch}:%{version}
-Requires:	%{libgluit} = %{epoch}:%{version}
+Requires:	%{libtrimesh} = %{EVRD}
+Requires:	%{libgluit} = %{EVRD}
 Requires:	olena-tools
 
 %description devel
@@ -138,22 +138,23 @@ of images (grey scale, color, 1D, 2D, 3D, ...).
 %patch1 -p0
 %patch2
 %patch3 -p1
-%if ! %with doc
+%patch4 -p1
+%if ! %{with doc}
 %patch0 -p0 -b .orig
-autoreconf -fi
 %endif
-pushd external/trimesh
-autoreconf -fi
-popd
 
 %build
 %global optflags %{optflags} -fpermissive
+autoreconf -fi
+pushd external/trimesh
+autoreconf -fi
+popd
 %configure2_5x \
-%if %with scribo
+%if %{with scribo}
 	--enable-scribo \
 %endif
 	--enable-trimesh \
-%if %with apps
+%if %{with apps}
 	--enable-apps \
 %endif
 	--enable-tools
@@ -166,64 +167,4 @@ popd
 
 %install
 %makeinstall_std
-
-
-%changelog
-* Thu Dec 01 2011 Dmitry Mikhirev <dmikhirev@mandriva.org> 2:2.0-3
-+ Revision: 735945
-- Fixed compatibility to tesseract 3.01
-
-* Wed Nov 09 2011 Andrey Smirnov <asmirnov@mandriva.org> 2:2.0-2
-+ Revision: 729310
-- Disable scribo until compatibility with current tesseract fixed
-
-* Wed Oct 05 2011 Nicolas Lécureuil <nlecureuil@mandriva.com> 2:2.0-1
-+ Revision: 703157
-- Fix file list
-- Install .a files
-- Clean spec file
-- New version 2.0
-
-  + Oden Eriksson <oeriksson@mandriva.com>
-    - rebuild
-
-  + Pascal Terjan <pterjan@mandriva.org>
-    - Drop require on gdcm-devel for now :
-      - It is in contribs
-      - It is unused now (configure does not find it)
-
-* Sat May 08 2010 Funda Wang <fwang@mandriva.org> 2:1.0-6mdv2010.1
-+ Revision: 543630
-- fix link
-- more BRs
-- add BR
-- add convert BR
-
-  + Oden Eriksson <oeriksson@mandriva.com>
-    - rebuilt for 2010.1
-
-* Wed Sep 23 2009 Helio Chissini de Castro <helio@mandriva.com> 2:1.0-4mdv2010.0
-+ Revision: 448013
-- Respect description, as requested in Mandriva bug #53959
-
-* Wed Sep 16 2009 Helio Chissini de Castro <helio@mandriva.com> 2:1.0-3mdv2010.0
-+ Revision: 443577
-- Build against tesseract shared.
-
-* Wed Sep 16 2009 Helio Chissini de Castro <helio@mandriva.com> 2:1.0-2mdv2010.0
-+ Revision: 443356
-- Fix the mess with olena revision
-
-* Mon Sep 14 2009 Helio Chissini de Castro <helio@mandriva.com> 1:1.0-0.0.419mdv2010.0
-+ Revision: 440844
-- finally fixed olen package as requested by nepomuk team. Disable milena doc
-  was necessary and use current trunk sources
-
-* Tue Aug 25 2009 Helio Chissini de Castro <helio@mandriva.com> 1.0-1mdv2010.0
-+ Revision: 421273
-- imported package olena
-
-  + Nicolas Lécureuil <nlecureuil@mandriva.com>
-    - import olena
-
 

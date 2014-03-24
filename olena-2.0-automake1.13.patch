@@ -1,0 +1,12 @@
+diff -urN olena-2.0/configure.ac olena-2.0-patched/configure.ac
+--- olena-2.0/configure.ac	2011-09-17 02:23:15.000000000 +1100
++++ olena-2.0-patched/configure.ac	2014-03-24 14:05:45.810368982 +1100
+@@ -36,6 +36,8 @@
+ # Automake.
+ AM_INIT_AUTOMAKE([1.10 subdir-objects check-news tar-ustar dist-bzip2 nostdinc -Wall])
+ 
++AM_PROG_AR
++
+ # Package metadata.
+ AC_CONFIG_FILES([milena/mln/version.hh])
+ AC_DEFINE_UNQUOTED([OLN_PACKAGE_NAME], ["$PACKAGE_NAME"],
