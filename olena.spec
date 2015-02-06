@@ -5,7 +5,7 @@
 Summary:	Olena is a platform dedicated to image processing
 Name:		olena
 Version:	2.0
-Release:	4
+Release:	5
 Epoch:		2
 License:	GPLv2+
 Group:		Development/C++
