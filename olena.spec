@@ -9,7 +9,7 @@ Release:	5
 Epoch:		2
 License:	GPLv2+
 Group:		Development/C++
-Url:		http://www.lrde.epita.fr/cgi-bin/twiki/view/Olena/WebHome
+Url:		https://www.lrde.epita.fr/cgi-bin/twiki/view/Olena/WebHome
 # Get from https://svn.lrde.epita.fr/svn/oln/tags/olena-1.0 to have scribo
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		olena-1.0-subdirs.patch
