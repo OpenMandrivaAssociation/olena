@@ -17,6 +17,11 @@ Patch1:		olena-1.0-linkage.patch
 Patch2:		olena-2.0-tesseract-3.01.patch
 Patch3:		olena-2.0-gcc4.7.patch
 Patch4:		olena-2.0-automake1.13.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	doxygen
 BuildRequires:	imagemagick
 BuildRequires:	latex2html
